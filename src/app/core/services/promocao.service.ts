@@ -13,7 +13,7 @@ export class PromocaoService {
 
   constructor(private http: HttpClient) { }
 
-  listar(): Observable<Promocao> {
-    return this.http.get<Promocao>(`http://localhost:8080/promocoes`);
+  listar(): Observable<Promocao[]> {
+    return this.http.get<Promocao[]>(`http://localhost:8080/promocoes`);
   }
 }

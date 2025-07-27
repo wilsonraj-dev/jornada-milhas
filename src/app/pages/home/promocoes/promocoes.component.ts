@@ -1,3 +1,4 @@
+// src/app/pages/home/promocoes/promocoes.component.ts
 import { Component, OnInit } from '@angular/core';
 import { PromocaoService } from 'src/app/core/services/promocao.service';
 import { Promocao } from 'src/app/core/types/types';
@@ -10,11 +11,11 @@ import { Promocao } from 'src/app/core/types/types';
 export class PromocoesComponent implements OnInit {
   promocoes!: Promocao[];
 
-  constructor(private promocaoService: PromocaoService) {}
-
+  constructor(private service: PromocaoService) {
+  }
+  
   ngOnInit(): void {
-    this.promocaoService.listar()
-    .subscribe(
+    this.service.listar().subscribe(
       res => {
         this.promocoes = res;
       }
