@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-seletor-passageiro',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./seletor-passageiro.component.scss']
 })
 export class SeletorPassageiroComponent {
-
+  @Input() titulo: string = '';
+  @Input() subtitulo: string = '';
 }
