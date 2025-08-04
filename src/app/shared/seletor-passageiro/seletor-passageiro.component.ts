@@ -1,10 +1,17 @@
-import { Component, Input } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import { Component, forwardRef, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-seletor-passageiro',
   templateUrl: './seletor-passageiro.component.html',
-  styleUrls: ['./seletor-passageiro.component.scss']
+  styleUrls: ['./seletor-passageiro.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SeletorPassageiroComponent),
+      multi: true
+    }
+  ]
 })
 export class SeletorPassageiroComponent implements ControlValueAccessor {
 
@@ -27,9 +34,7 @@ export class SeletorPassageiroComponent implements ControlValueAccessor {
     this.onTouch = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    throw new Error('Method not implemented.');
-  }
+  setDisabledState?(isDisabled: boolean): void { }
 
   incrementar() {
     this.value += 1;
