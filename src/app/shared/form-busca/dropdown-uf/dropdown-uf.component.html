@@ -3,10 +3,17 @@
     <mat-icon matPrefix>
         {{ iconePrefixo }}
     </mat-icon>
-    <input type="text" matInput [formControl]="ufControl" [matAutocomplete]="auto" />
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
-        <mat-option *ngFor="let uf of unidadesFiltradas$ | async" [value]="uf">
-            {{ uf.nome }}
+    <input
+        matInput
+        placeholder="Origem"
+        [formControl]="control"
+        [name]="label"
+        ngDefaultControl
+        [matAutocomplete]="auto">
+    <mat-icon matSuffix>search</mat-icon>
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let estado of filteredOptions$ | async" [value]="estado.nome">
+          {{estado.nome}}
         </mat-option>
-    </mat-autocomplete>
+      </mat-autocomplete>
 </mat-form-field>

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { map, Observable, startWith } from 'rxjs';
+import { Observable, map, startWith } from 'rxjs';
 import { UnidadeFederativaService } from 'src/app/core/services/unidade-federativa.service';
 import { UnidadeFederativa } from 'src/app/core/types/types';
 
@@ -12,37 +12,32 @@ import { UnidadeFederativa } from 'src/app/core/types/types';
 export class DropdownUfComponent implements OnInit {
   @Input() label: string = '';
   @Input() iconePrefixo: string = '';
+  @Input() control!: FormControl;
 
-  ufControl = new FormControl<string | UnidadeFederativa>('');
   unidadesFederativas: UnidadeFederativa[] = [];
-  unidadesFiltradas$!: Observable<UnidadeFederativa[]>;
 
-  constructor(private unidadeFederativaService: UnidadeFederativaService) { }
+  filteredOptions$?: Observable<UnidadeFederativa[]>;
+
+
+  constructor(
+    private unidadeFederativaService: UnidadeFederativaService) { }
 
   ngOnInit(): void {
     this.unidadeFederativaService.listar()
       .subscribe(dados => {
-        this.unidadesFederativas = dados;
-      });
-
-    this.unidadesFiltradas$ = this.ufControl.valueChanges.pipe(
-      startWith(''),
-      map(value => {
-        const nome = typeof value === 'string' ? value : value?.nome;
-        return nome ? this._filtrar(nome) : this.unidadesFederativas.slice();
+        this.unidadesFederativas = dados
       })
-    );
+    this.filteredOptions$ = this.control.valueChanges.pipe(
+      startWith(''),
+      map(value => this.filtrarUfs(value))
+    )
   }
 
-  private _filtrar(nome: string): UnidadeFederativa[] {
-    const filterValue = nome.toLowerCase();
-    return this.unidadesFederativas.filter(uf =>
-      uf.nome.toLowerCase().includes(filterValue) ||
-      uf.sigla.toLowerCase().includes(filterValue)
-    );
-  }
-
-  displayFn(uf: UnidadeFederativa): string {
-    return uf && uf.nome ? `${uf.nome} - ${uf.sigla}` : '';
+  filtrarUfs(value: string): UnidadeFederativa[] {
+    const valorFiltrado = value?.toLowerCase();
+    const result = this.unidadesFederativas.filter(
+      estado => estado.nome.toLowerCase().includes(valorFiltrado)
+    )
+    return result
   }
 }
