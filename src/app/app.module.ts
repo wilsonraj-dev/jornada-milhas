@@ -34,6 +34,7 @@ import { DropdownUfComponent } from './shared/form-busca/dropdown-uf/dropdown-uf
 import { DepoimentosComponent } from './pages/home/depoimentos/depoimentos.component';
 import { SeletorPassageiroComponent } from './shared/seletor-passageiro/seletor-passageiro.component';
 import { LoginComponent } from './pages/login/login.component';
+import { FormularioBaseComponent } from './shared/formulario-base/formulario-base.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { LoginComponent } from './pages/login/login.component';
     DropdownUfComponent,
     DepoimentosComponent,
     SeletorPassageiroComponent,
-    LoginComponent
+    LoginComponent,
+    FormularioBaseComponent
   ],
   imports: [
     BrowserModule,
