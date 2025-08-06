@@ -35,6 +35,9 @@ import { DepoimentosComponent } from './pages/home/depoimentos/depoimentos.compo
 import { SeletorPassageiroComponent } from './shared/seletor-passageiro/seletor-passageiro.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FormularioBaseComponent } from './shared/formulario-base/formulario-base.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -74,7 +77,10 @@ import { FormularioBaseComponent } from './shared/formulario-base/formulario-bas
     MatDialogModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatRadioModule,
+    MatDividerModule,
+    MatCheckboxModule,    
   ],
   providers: [],
   bootstrap: [AppComponent]
