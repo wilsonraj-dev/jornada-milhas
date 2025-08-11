@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormularioService } from 'src/app/core/services/formulario.service';
 import { UnidadeFederativa } from 'src/app/core/types/types';
 
 @Component({
@@ -13,7 +14,8 @@ export class FormularioBaseComponent implements OnInit {
   @Input() perfilComponent!: boolean;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>(); 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private formularioService: FormularioService
   ) { }
 
   ngOnInit(): void {
@@ -30,7 +32,9 @@ export class FormularioBaseComponent implements OnInit {
       confirmarEmail: [null, [Validators.required, Validators.email]],
       confirmarSenha: [null, [Validators.required, Validators.minLength(3)]],
       aceitarTermos: [null, [Validators.requiredTrue]]
-    })
+    });
+
+    this.formularioService.setCadastro(this.cadastroForm);
   }
 
   executarAcao() {
