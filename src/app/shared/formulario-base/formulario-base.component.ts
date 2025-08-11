@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { FormularioService } from 'src/app/core/services/formulario.service';
 import { UnidadeFederativa } from 'src/app/core/types/types';
+import { FormValidations } from '../form-validations';
 
 @Component({
   selector: 'app-formulario-base',
@@ -13,7 +14,7 @@ export class FormularioBaseComponent implements OnInit {
   estadoControl = new FormControl<UnidadeFederativa | null>(null, Validators.required);
   @Input() perfilComponent!: boolean;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private formularioService: FormularioService
@@ -30,8 +31,8 @@ export class FormularioBaseComponent implements OnInit {
       genero: ['outro'],
       telefone: [null, Validators.required],
       estado: this.estadoControl,
-      confirmarEmail: [null, [Validators.required, Validators.email]],
-      confirmarSenha: [null, [Validators.required, Validators.minLength(3)]],
+      confirmarEmail: [null, [Validators.required, Validators.email, FormValidations.equalTo('email')]],
+      confirmarSenha: [null, [Validators.required, Validators.minLength(3), FormValidations.equalTo('senha')]],
       aceitarTermos: [null, [Validators.requiredTrue]]
     });
 
