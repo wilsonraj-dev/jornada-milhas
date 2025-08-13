@@ -9,4 +9,12 @@ export class PerfilComponent {
   titulo = 'Olá, Usuário!';
   textoBotao = 'ATUALIZAR';
   perfilComponent = true;
+
+  deslogar() {
+    // Lógica para deslogar o usuário
+  }
+
+  atualizar() {
+    
+  }
 }
