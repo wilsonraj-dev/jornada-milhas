@@ -1,7 +1,7 @@
 <app-banner src="assets/imagens/banner-perfil.png" alt="Banner da tela de Perfil"></app-banner>
 
 <app-formulario-base 
-[titulo]="titulo" 
+[titulo]="titulo + nome"
 [textoBotao]="textoBotao" 
 [perfilComponent]="perfilComponent"
 (sair)="deslogar()"
