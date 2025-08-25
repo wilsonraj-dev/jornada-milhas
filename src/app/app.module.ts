@@ -48,6 +48,7 @@ import { LabelComponent } from './shared/label/label.component';
 import { CompanhiasComponent } from './shared/form-busca/filtros-complementares/companhias/companhias.component';
 import { ParadasComponent } from './shared/form-busca/filtros-complementares/paradas/paradas.component';
 import { PrecosComponent } from './shared/form-busca/filtros-complementares/precos/precos.component';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import { PrecosComponent } from './shared/form-busca/filtros-complementares/prec
     MatAutocompleteModule,
     MatRadioModule,
     MatDividerModule,
-    MatCheckboxModule,    
+    MatCheckboxModule,
+    MatSliderModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
