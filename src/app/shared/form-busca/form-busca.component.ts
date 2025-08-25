@@ -13,7 +13,7 @@ export class FormBuscaComponent {
 
   buscar() {
     if (this.formBuscaService.formEstaValido) {
-      const formBuscaValue = this.formBuscaService.formBusca.value;
+      const formBuscaValue = this.formBuscaService.obterDadosDeBusca();
       this.realizarBusca.emit(formBuscaValue);
     }
     else {
