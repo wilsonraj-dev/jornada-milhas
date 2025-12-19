@@ -20,13 +20,16 @@ export class FormBuscaService {
       somenteIda,
       origem: new FormControl(null, [Validators.required]),
       destino: new FormControl(null, [Validators.required]),
-      tipo: new FormControl("Executiva"),
+      tipo: new FormControl("Econômica"),
       adultos: new FormControl(3),
       criancas: new FormControl(0),
       bebes: new FormControl(1),
       dataIda: new FormControl(null, [Validators.required]),
       dataVolta,
-      conexoes: new FormControl(null)
+      conexoes: new FormControl(null),
+      companhias: new FormControl(null),
+      precoMin: new FormControl(null),
+      precoMax: new FormControl(null)
     })
 
     somenteIda.valueChanges.subscribe(somenteIda => {
@@ -85,18 +88,17 @@ export class FormBuscaService {
   obterDadosDeBusca(): DadosBusca {
     const dataIdaControl = this.obterControle<Date>('dataIda').value;
 
-
     const dadosBusca: DadosBusca = {
       pagina: 1,
       porPagina: 50,
-      somenteIda: this.obterControle<boolean>('somenteIda').value,
-      origemId: this.obterControle<number>('origem').value.id,
-      destinoId: this.obterControle<boolean>('destino').value.id,
-      tipo: this.obterControle<string>('tipo').value,
+      dataIda: dataIdaControl.value.toISOString(),
       passageirosAdultos: this.obterControle<number>('passageirosAdultos').value,
       passageirosCriancas: this.obterControle<number>('passageirosCriancas').value,
       passageirosBebes: this.obterControle<number>('passageirosBebes').value,
-      dataIda: dataIdaControl.value.toISOString()
+      somenteIda: this.obterControle<boolean>('somenteIda').value,
+      origemId: this.obterControle<number>('origem').value.id,
+      destinoId: this.obterControle<boolean>('destino').value.id,
+      tipo: this.obterControle<string>('tipo').value,      
     }
 
     const dataVoltaControl = this.obterControle<Date>('dataVolta').value;
@@ -108,6 +110,22 @@ export class FormBuscaService {
     if (conexoesControl.value) {
       dadosBusca.conexoes = conexoesControl.value;
     }
+
+    const companhiasControl = this.obterControle<number>('companhias');
+    if (companhiasControl.value) {
+      dadosBusca.companhiasId = companhiasControl.value;
+    }
+
+    const precoMinControl = this.obterControle<number>('precoMin');
+    if (precoMinControl.value) {
+      dadosBusca.precoMin = precoMinControl.value;
+    }
+
+    const precoMaxControl = this.obterControle<number>('precoMax');
+    if (precoMaxControl.value) {
+      dadosBusca.precoMax = precoMaxControl.value;
+    }
+
     return dadosBusca;
   }
 
